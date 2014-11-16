@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "author": "The Island (git://github.com/The-Island)",
+  "name": "island-util",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/The-Island/island-util.git"
+  },
+  "dependencies": {
+    "underscore": "^1.4.4",
+    "underscore.string": "~2.3.1"
+  }
+}
+
