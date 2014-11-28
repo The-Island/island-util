@@ -122,3 +122,32 @@ exports.tagify = function (str, delim) {
     .reject(function (t) { return t === ''; })
     .map(function (t) { return t.trim(); }).uniq().value();
 };
+
+/*
+ * Parse video URL from text.
+ */
+exports.parseVideoURL = function (url) {
+  if (!url) {
+    return false;
+  }
+
+  // Try Vimeo.
+  var m = url.match(/vimeo.com\/(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/);
+  if (m) {
+    return {link: {
+      id: m[3],
+      type: 'vimeo'
+    }};
+  }
+
+  // Try Youtube.
+  m = url.match(/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/);
+  if (m) {
+    return {link: {
+      id: m[5],
+      type: 'youtube'
+    }};
+  } else {
+    return false;
+  }
+}
