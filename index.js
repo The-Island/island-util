@@ -151,3 +151,24 @@ exports.parseVideoURL = function (url) {
     return false;
   }
 }
+
+/*
+ * Restrict characters to letters, numbers, periods, underscores
+ * and a max length of 30.
+ */
+exports.toUsername = function (str) {
+  if (str == null) {
+    return '';
+  }
+
+  var from  = "ąàáäâãåæăćęèéëêìíïîłńòóöôõøśșțùúüûñçżźĄÀÁÄÂÃÅÆĂĆĘÈÉËÊÌÍÏÎŁŃÒÓÖÔÕØŚȘȚÙÚÜÛÑÇŻŹ",
+      to    = "aaaaaaaaaceeeeeiiiilnoooooosstuuuunczzAAAAAAAAACEEEEEIIIILNOOOOOOSSTUUUUNCZZ",
+      regex = new RegExp('[' + from + ']', 'g');
+
+  str = String(str).replace(regex, function (c) {
+    var index = from.indexOf(c);
+    return to.charAt(index) || '_';
+  });
+
+  return str.replace(/[^\w^\.\s]/g, '_').substr(0, 30);
+}
