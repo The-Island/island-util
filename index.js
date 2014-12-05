@@ -32,25 +32,11 @@ exports.client = function (obj) {
 };
 
 /*
- * Creates a string identifier.
- * @length Number
- */
-exports.key = function (length) {
-  length = length || 8;
-  var key = '';
-  var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  for (var i = 0; i < length; ++i) {
-    key += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return key;
-};
-
-/*
  * Returns true if valid date
  * http://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
  */
 exports.isValidDate = function(d) {
-  if (Object.prototype.toString.call(d) === "[object Date]") {
+  if (Object.prototype.toString.call(d) === '[object Date]') {
     if (!(isNaN(d.getTime()))) {
       return true;
     }
@@ -100,6 +86,39 @@ exports.hash = function (str) {
  */
 exports.createId_32 = function () {
   return parseInt(Math.random() * 0x7fffffff);
+};
+
+/*
+ * Creates a string identifier.
+ */
+exports.key = function (length) {
+  length = length || 8;
+  var key = '';
+  var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  for (var i = 0; i < length; ++i) {
+    key += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return key;
+};
+
+/*
+ * Creates an official looking long ass string identifier.
+ */
+exports.code = function (numSegments, maxSegmentLength) {
+  numSegments = numSegments || 8;
+  var code = '';
+  var possible = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  for (var i = 0; i < numSegments; ++i) {
+    var l = Math.floor(Math.random() * (maxSegmentLength || numSegments * 3));
+    l = l || 1;
+    for (var j = 0; j < l; ++j) {
+      code += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    if (i !== numSegments - 1) {
+      code += '-';
+    }
+  }
+  return code;
 };
 
 /*
