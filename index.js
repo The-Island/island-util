@@ -189,5 +189,5 @@ exports.toUsername = function (str) {
     return to.charAt(index) || '_';
   });
 
-  return str.replace(/[^\w^\.\s]/g, '_').substr(0, 30);
+  return str.replace(/[^\w^\.]/g, '_').substr(0, 30);
 }
