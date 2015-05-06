@@ -42,7 +42,7 @@ exports.isValidDate = function(d) {
     }
   }
   return false;
-}
+};
 
 /*
  * Returns the first property of object that does not match given type.
@@ -58,7 +58,7 @@ exports.validateObjectTypes = function (types, props) {
     invalid.msg = invalid.k + ' must be a ' + invalid.t;
   }
   return invalid;
-}
+};
 
 /*
  * Make salt for a password.
@@ -85,7 +85,7 @@ exports.hash = function (str) {
  * Create a 32-bit identifier.
  */
 exports.createId_32 = function () {
-  return parseInt(Math.random() * 0x7fffffff);
+  return parseInt(Math.random() * 0x7fffffff, 10);
 };
 
 /*
@@ -151,7 +151,7 @@ exports.parseVideoURL = function (url) {
   }
 
   // Try Vimeo.
-  var m = url.match(/vimeo.com\/(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/);
+  var m = url.match(/vimeo.com\/(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)/i);
   if (m) {
     return {link: {
       id: m[3],
@@ -160,7 +160,7 @@ exports.parseVideoURL = function (url) {
   }
 
   // Try Youtube.
-  m = url.match(/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/);
+  m = url.match(/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>\s]+)/i);
   if (m) {
     return {link: {
       id: m[5],
@@ -169,14 +169,14 @@ exports.parseVideoURL = function (url) {
   } else {
     return false;
   }
-}
+};
 
 /*
  * Restrict characters to letters, numbers, periods, underscores
  * and a max length of 30.
  */
 exports.toUsername = function (str) {
-  if (str == null) {
+  if (str === null) {
     return '';
   }
 
@@ -190,4 +190,4 @@ exports.toUsername = function (str) {
   });
 
   return str.replace(/[^\w^\.]/g, '_').substr(0, 30);
-}
+};
