@@ -5,7 +5,6 @@
 
 // Module Dependencies
 var crypto = require('crypto');
-var util = require('util');
 var _ = require('underscore');
 _.mixin(require('underscore.string'));
 
@@ -19,7 +18,7 @@ exports.client = function (obj) {
     obj.id = obj._id.toString();
     delete obj._id;
   }
-  _.each(obj, function (att, n) {
+  _.each(obj, function (att) {
     if (_.isObject(att) && att._id) {
       att.id = att._id.toString();
       delete att._id;
@@ -218,7 +217,8 @@ exports.key = function (length) {
 exports.code = function (numSegments, maxSegmentLength) {
   numSegments = numSegments || 8;
   var code = '';
-  var possible = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  var possible
+      = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   for (var i = 0; i < numSegments; ++i) {
     var l = Math.floor(Math.random() * (maxSegmentLength || numSegments * 3));
     l = l || 1;
@@ -302,3 +302,18 @@ exports.toUsername = function (str) {
 
   return str.replace(/[^\w^\.]/g, '_').substr(0, 30);
 };
+
+
+/*
+ * Filter for @atmentions
+ */
+exports.atmentions = function (str) {
+  var re = /@(\S*)\b/g;
+  var matches = [];
+  var res;
+  while ((res = re.exec(str)) !== null) {
+    matches.push(res[1]);
+  }
+  return matches;
+};
+
