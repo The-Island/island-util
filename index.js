@@ -6,6 +6,7 @@
 // Module Dependencies
 var crypto = require('crypto');
 var _ = require('underscore');
+var oid = require('mongish').oid;
 
 /*
  * Prepare obj for client.

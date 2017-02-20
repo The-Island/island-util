@@ -8,6 +8,7 @@
     "url": "git://github.com/The-Island/island-util.git"
   },
   "dependencies": {
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
+    "mongish": "git+https://github.com/sanderpick/mongish.git#develop"
   }
 }
