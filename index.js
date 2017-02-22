@@ -90,7 +90,7 @@ var deepClone = exports.deepClone = function (src, _visited, _copiesVisited) {
 
     var i = ret.length;
     while (i--) {
-      ret[i] = deepCopy(ret[i], _visited, _copiesVisited);
+      ret[i] = deepClone(ret[i], _visited, _copiesVisited);
     }
     return ret;
   }
