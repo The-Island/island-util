@@ -1,14 +1,13 @@
 {
-  "private": true,
   "author": "The Island (git://github.com/The-Island)",
-  "name": "island-util",
+  "name": "@islandio/util",
   "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/The-Island/island-util.git"
   },
   "dependencies": {
-    "mongish": "^2.0.0",
+    "mongish": "^2.0.1",
     "underscore": "~1.8.3"
   }
 }
